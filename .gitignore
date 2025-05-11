@@ -1,0 +1,39 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel/
+
+# Logs
+logs
+*.log
+yarn.lock
+
+# System
+.DS_Store
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# VSCode
+.vscode/
+
+# Supabase Config
+supabase/.temp
+supabase/.output
+
+# Build
+dist/
+build/
+out/
+.next/
+.cache/
+coverage/
+
+# OS Metadata
+Thumbs.db
