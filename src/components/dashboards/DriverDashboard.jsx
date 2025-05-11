@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase';
 import { useAuth } from '@/contexts/AuthContext';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { useToast } from '@/components/ui/use-toast';
+import MiniMileageCalculator from '@/components/MiniMileageCalculator';
 
 const DriverDashboard = () => {
   const { user } = useAuth();
@@ -43,7 +44,7 @@ const DriverDashboard = () => {
       completedLoads: loadsData?.filter(load => load.status === 'Completed').length || 0,
       totalEarnings: paymentsData?.reduce((sum, payment) => sum + Number(payment.amount), 0) || 0,
       upcomingLoads: loadsData?.filter(load => load.status === 'Scheduled').length || 0,
-      complianceAlerts: [] // Placeholder
+      complianceAlerts: []
     });
   };
 
@@ -68,11 +69,7 @@ const DriverDashboard = () => {
 
   return (
     <div className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
         <h1 className="text-3xl font-bold">Driver Dashboard</h1>
         <p className="text-muted-foreground mt-2">Welcome back! Here's your overview.</p>
       </motion.div>
@@ -88,16 +85,15 @@ const DriverDashboard = () => {
         <EarningsChart chartData={chartData} />
         <UpcomingLoadsPanel loads={loads} onStatusUpdate={handleStatusUpdate} />
       </div>
+
+      {/* Mini Route Calculator */}
+      <MiniMileageCalculator />
     </div>
   );
 };
 
 const SummaryCard = ({ icon, title, value, color }) => (
-  <motion.div
-    className="glass-effect p-4 rounded-lg"
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-  >
+  <motion.div className="glass-effect p-4 rounded-lg" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
     <div className="flex items-center gap-2">
       <div className={`h-5 w-5 ${color}`}>{icon}</div>
       <h3 className="font-medium">{title}</h3>
@@ -107,11 +103,7 @@ const SummaryCard = ({ icon, title, value, color }) => (
 );
 
 const EarningsChart = ({ chartData }) => (
-  <motion.div
-    className="glass-effect p-4 rounded-lg"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-  >
+  <motion.div className="glass-effect p-4 rounded-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
     <h3 className="text-xl font-bold mb-4">Earnings Trend</h3>
     <div className="h-[300px]">
       <ResponsiveContainer width="100%" height="100%">
@@ -128,11 +120,7 @@ const EarningsChart = ({ chartData }) => (
 );
 
 const UpcomingLoadsPanel = ({ loads, onStatusUpdate }) => (
-  <motion.div
-    className="glass-effect p-4 rounded-lg"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-  >
+  <motion.div className="glass-effect p-4 rounded-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
     <h3 className="text-xl font-bold mb-4">Assigned Loads</h3>
     <div className="space-y-4">
       {loads.map(load => (

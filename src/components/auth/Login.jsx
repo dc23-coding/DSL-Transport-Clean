@@ -101,7 +101,7 @@ const Login = () => {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full max-w-md">
         <div className="glass-effect rounded-lg p-8 shadow-xl">
           <div className="flex flex-col items-center mb-8">
-            <img src="https://storage.googleapis.com/hostinger-horizons-assets-prod/981c1f7c-d49b-4a25-b84f-4712fb519dd3/6767e24e0e87af195e66f7aff138577e.png" alt="DSL Transport Logo" className="h-16 w-auto mb-4" />
+            <img src="/assets/dsl-logo.png" alt="DSL Transport Logo" className="h-16 w-auto mb-4" />
             <h2 className="text-2xl font-bold">Welcome to DSL Transport</h2>
             <p className="text-muted-foreground mt-2">Access your dashboard</p>
           </div>

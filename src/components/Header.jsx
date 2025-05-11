@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,7 +8,7 @@ import { Menu, X, LogOut, User, Truck, Package, DollarSign } from 'lucide-react'
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { adminMode, setAdminMode } = useAuth();
+  const { adminMode, setAdminMode, userRole } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
@@ -17,8 +16,21 @@ const Header = () => {
     navigate('/login');
   };
 
+  const getDashboardPath = () => {
+    switch (userRole) {
+      case 'admin':
+        return '/';
+      case 'driver':
+        return '/driver-dashboard';
+      case 'broker':
+        return '/broker-dashboard';
+      default:
+        return '/login';
+    }
+  };
+
   const menuItems = [
-    { path: '/', icon: <User className="h-5 w-5" />, label: 'Admin Dashboard' },
+    { path: '/', icon: <User className="h-5 w-5" />, label: 'Admin Overview' },
     { path: '/driver-dashboard', icon: <Truck className="h-5 w-5" />, label: 'Driver View' },
     { path: '/broker-dashboard', icon: <Package className="h-5 w-5" />, label: 'Broker View' },
     { path: '/payroll', icon: <DollarSign className="h-5 w-5" />, label: 'Payroll' },
@@ -29,14 +41,17 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <Link to="/" className="flex items-center gap-2">
+            <button
+              onClick={() => navigate(getDashboardPath())}
+              className="flex items-center gap-2"
+            >
               <img 
-                src="https://storage.googleapis.com/hostinger-horizons-assets-prod/981c1f7c-d49b-4a25-b84f-4712fb519dd3/6767e24e0e87af195e66f7aff138577e.png"
+                src="/assets/dsl-logo.png"
                 alt="DSL Transport Logo"
                 className="h-8 w-auto"
               />
               <span className="font-bold text-xl">DSL Transport</span>
-            </Link>
+            </button>
           </div>
 
           {adminMode && (
