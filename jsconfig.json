@@ -1,0 +1,13 @@
+// jsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ES6"
+  },
+  "exclude": ["node_modules", "dist"]
+}
